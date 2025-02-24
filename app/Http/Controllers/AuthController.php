@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -85,4 +87,36 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('account.login')->with('success', 'You have been logged out');
     }
+
+    public function orders()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để xem đơn hàng.');
+        }
+        $user = Auth::user();
+
+        $orders = Order::where('user_id', $user->id)
+            ->latest()
+            ->select('id', 'created_at', 'status', 'grand_total')
+            ->get();
+
+//        $data['orders'] = $orders;
+        return view('front.account.order', compact('orders'));
+    }
+
+    public function orderDetails($id)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+        $order = Order::where('user_id', Auth::id())
+            ->with('items')
+            ->findOrFail($id);
+
+        $countOrder = $order->items->count();
+        $orderDetails = $order->items;
+
+        return view('front.account.order-details', compact('order', 'countOrder', 'orderDetails'));
+    }
+
 }

@@ -250,7 +250,8 @@
                                                  alt="">
                                         @endif
                                     </a>
-                                    <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
+
+                                    <a onclick="addToWishlist({{$product->id}})" href="javascript:void(0);" class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
                                     <div class="product-action">
                                         <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{$product->id}})">
@@ -462,7 +463,8 @@
                                                  alt="">
                                         @endif
                                     </a>
-                                    <a class="whishlist" href="222"><i class="far fa-heart"></i></a>
+
+                                    <a onclick="addToWishlist({{$product->id}})" href="javascript:void(0);" class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
                                     <div class="product-action">
                                         <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{$product->id}})">

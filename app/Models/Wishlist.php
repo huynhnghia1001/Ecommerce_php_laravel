@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Wishlist extends Model
 {
     use HasFactory;
-    public function items()
-    {
-        return $this->hasMany(OrderItem::class, 'order_id');
-    }
+
+    public $fillable = ['user_id', 'product_id'];
 }

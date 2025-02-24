@@ -8,7 +8,6 @@ use App\Models\DiscountCoupon;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Order;
-use App\Models\Shipping;
 use App\Models\ShippingCharges;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -228,7 +227,7 @@ class CartController extends Controller
 
         if ($request->payment_method == 'cod') {
 
-            $discountCodeId = '';
+            $discountCodeId = NULL;
             $promoCode = '';
             $shipping = 0;
             $discount = 0;
@@ -278,6 +277,8 @@ class CartController extends Controller
             $order->discount = $discount;
             $order->coupon_code_id = $discountCodeId;
             $order->coupon_code = $promoCode;
+            $order->payment_status = 'not paid';
+            $order->status = 'pending';
             $order->user_id = $user->id;
             $order->first_name = $request->first_name;
             $order->last_name = $request->last_name;
@@ -302,6 +303,8 @@ class CartController extends Controller
                 $orderItem->total = $item->price * $item->qty;
                 $orderItem->save();
             }
+
+            orderEmail($order->id,'customer');
 
             session()->flash('success', 'You have successfully placed your order!');
 

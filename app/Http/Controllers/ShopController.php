@@ -42,10 +42,12 @@ class ShopController extends Controller
             if($request->get('price_max') == 1000){
                 $products = $products->whereBetween('price', [intval($request->get('price_min')), 100000]);
             }else{
-                $products = $products->whereBetween('price', [intval($request->get('price_min')), [intval($request->get('price_max'))]]);
-                $products = $products->whereBetween('price', [intval($request->get('price_min')),intval($request->get('price_max'))]);
-
+                $products = $products->whereBetween('price', [intval($request->get('price_min')), intval($request->get('price_max'))]);
             }
+        }
+
+        if(!empty($request->get('search'))){
+            $products = $products->where('title', 'like', '%'.$request->get('search').'%');
         }
 
         $sort = $request->get('sort');
@@ -87,7 +89,7 @@ class ShopController extends Controller
         //fetch related products
         if($product->related_products != ''){
             $productArray = explode(',', $product->related_products);
-            $relatedProducts = Product::whereIn('id', $productArray)->with('product_images')->get();
+            $relatedProducts = Product::whereIn('id', $productArray)->where('status', 1)->with('product_images')->get();
         }
         $data['product'] = $product;
         $data['relatedProducts'] = $relatedProducts;

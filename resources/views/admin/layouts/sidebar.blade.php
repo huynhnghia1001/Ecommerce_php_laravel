@@ -13,7 +13,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="/" class="nav-link">
+                    <a href="{{route('admin.dashboard')}}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -44,6 +44,12 @@
                         <p>Products</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('products.productRatings')}}" class="nav-link">
+                        <i class="nav-icon fas fa-tag"></i>
+                        <p>Ratings</p>
+                    </a>
+
 
                 <li class="nav-item">
                     <a href="{{route('shipping.create')}}" class="nav-link">

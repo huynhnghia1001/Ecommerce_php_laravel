@@ -73,7 +73,8 @@ class PageController extends Controller
         if ($validated->fails()) {
             return response()->json([ 'status' => false, 'errors' => $validated->errors()->first() ]);
         }
-            Pages::update($request->only('name', 'slug', 'content'));
+        $page = Pages::find($id);
+        $page->update($request->only('name', 'slug', 'content'));
         session()->flash('success', 'Page updated successfully');
         return response()->json([
             'status' => true,
@@ -88,5 +89,8 @@ class PageController extends Controller
         }
         $page->delete();
         session()->flash('success', 'Page deleted successfully');
+        return response()->json([
+            'status' => true,
+        ]);
     }
 }

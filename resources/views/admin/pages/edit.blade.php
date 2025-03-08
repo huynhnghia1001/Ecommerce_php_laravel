@@ -36,7 +36,7 @@
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label for="content">Content</label>
-                                <textarea value="{{$page->content}}" name="content" id="content" class="summernote" cols="30" rows="10"></textarea>
+                                <textarea name="content" id="content" class="summernote" cols="30" rows="10">{{$page->content}}</textarea>
                             </div>
                         </div>
                     </div>

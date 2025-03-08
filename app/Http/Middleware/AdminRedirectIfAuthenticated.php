@@ -18,7 +18,7 @@ class AdminRedirectIfAuthenticated
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
         if (Auth::guard('admin')->check()) {
-            return redirect()->route('admin.dasboard');
+            return redirect()->route('admin.login');
         }
 
         return $next($request);

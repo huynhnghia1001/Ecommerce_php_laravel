@@ -63,8 +63,8 @@
                                     <td>{{$order->email}}</td>
                                     <td>{{$order->mobile}}</td>
                                     <td>
-                                        @if($order->status == 'pedding')
-                                            <span class="badge bg-danger">Pendding</span>
+                                        @if($order->status == 'pending')
+                                            <span class="badge bg-danger">Pending</span>
                                         @elseif($order->status == 'shipping')
                                             <span class="badge bg-info">Shipping</span>
                                         @elseif($order->status == 'delivered')
